@@ -13,7 +13,7 @@ pip install plyer
 🚀 Қолдану
 
 Кодты жүктеу:
-git clone https://github.com/сенің-репозиторийің.git
+git clone https://github.com/Elikon0106/ARP-Saqshy.git
 cd сенің-репозиторийің
 
 Скриптті іске қосу:
