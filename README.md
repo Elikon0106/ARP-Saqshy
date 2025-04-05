@@ -1,4 +1,4 @@
-ARP Spoofing Detector: Установка и Настройка
+##ARP Spoofing Detector: Установка и Настройка##
 Этот инструмент предназначен для обнаружения атак ARP Spoofing и уведомления пользователя о возможных угрозах. Программа мониторит ARP-таблицу устройства и уведомляет о любых изменениях, которые могут свидетельствовать о попытке ARP-спуфинга.
 
 Шаг 1: Создание исполняемого файла с помощью PyInstaller
@@ -10,21 +10,12 @@ win10toast
 
 Вы можете установить их с помощью pip:
 
-bash
-Копировать
-Редактировать
 pip install PyQt5 win10toast
 Установите PyInstaller для создания исполняемого файла:
 
-bash
-Копировать
-Редактировать
 pip install pyinstaller
 После того, как вы создали файл ARP_Saqshy.py, используйте следующую команду для создания исполняемого файла:
 
-bash
-Копировать
-Редактировать
 pyinstaller --onefile --noconsole --name ARPDetector ARP_Saqshy.py
 Эта команда создаст исполняемый файл без консоли, который будет называться ARPDetector.exe.
 
@@ -37,9 +28,6 @@ pyinstaller --onefile --noconsole --name ARPDetector ARP_Saqshy.py
 
 Перейдите по следующему пути:
 
-mathematica
-Копировать
-Редактировать
 HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Run
 Создайте новый строковый параметр:
 
@@ -49,17 +37,11 @@ HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Run
 
 В значении укажите путь к файлу ARPDetector.exe, который вы создали с помощью PyInstaller. Например:
 
-vbnet
-Копировать
-Редактировать
 C:\path\to\your\ARPDetector.exe
 Автоматическая настройка (через код): Если вы хотите настроить автозапуск прямо из приложения, код уже содержит функцию для этого:
 
 Для Windows приложение добавит запись в реестр автоматически при запуске. Это будет выполнено с помощью winreg в коде:
 
-python
-Копировать
-Редактировать
 self.setup_autostart_windows()
 Это добавит ARPDetector в реестр и обеспечит его автоматический запуск при старте Windows.
 
@@ -70,24 +52,15 @@ self.setup_autostart_windows()
 
 Программа создает файл arp_detector.service, который будет запускать вашу программу при старте системы:
 
-python
-Копировать
-Редактировать
 self.setup_autostart_linux()
 Сервис будет настроен с использованием systemd. Для его активации будет выполнено несколько команд:
 
-bash
-Копировать
-Редактировать
 sudo systemctl enable arp_detector.service
 sudo systemctl start arp_detector.service
 Ручной метод: Если вы хотите вручную настроить автозапуск:
 
 Создайте файл сервиса в /etc/systemd/system/arp_detector.service с содержимым:
 
-ini
-Копировать
-Редактировать
 [Unit]
 Description=ARP Detector Service
 After=network.target
@@ -100,9 +73,6 @@ Restart=always
 WantedBy=default.target
 Активируйте и запустите сервис:
 
-bash
-Копировать
-Редактировать
 sudo systemctl enable arp_detector.service
 sudo systemctl start arp_detector.service
 Шаг 4: Использование
