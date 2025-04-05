@@ -5,7 +5,7 @@ import sys
 import platform
 from PyQt5.QtWidgets import QApplication, QWidget, QVBoxLayout, QPushButton, QTextEdit, QLabel
 from PyQt5.QtCore import QTimer
-from win10toast import ToastNotifier
+from plyer import notification
 import winreg
 
 title = "ARP-Detector"
