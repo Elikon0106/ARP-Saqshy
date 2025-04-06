@@ -18,7 +18,7 @@
 
 3. После того как вы создали файл `ARP_Saqshy.py`, выполните следующую команду для создания исполняемого файла:
    ```bash
-   pyinstaller --onefile --noconsole --name ARPDetector ARP_Saqshy.py
+   pyinstaller --noconfirm --windowed --onefile --icon=icon.ico ARP_Saqshy.py
    ```
    Это создаст исполняемый файл **`ARPDetector.exe`**, который не будет открывать консольное окно.
 
