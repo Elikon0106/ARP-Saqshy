@@ -3,14 +3,19 @@ import time
 import re
 import sys
 import platform
-from PyQt5.QtWidgets import QApplication, QWidget, QVBoxLayout, QPushButton, QTextEdit, QLabel
+from PyQt5.QtWidgets import (
+    QApplication, QWidget, QVBoxLayout, QPushButton, QTextEdit, QLabel,
+    QSystemTrayIcon, QMenu, QAction
+)
+from PyQt5.QtGui import QIcon
 from PyQt5.QtCore import QTimer
-from plyer import notification
+from win10toast import ToastNotifier
 import winreg
 
 title = "ARP-Detector"
 SCAN_INTERVAL = 10  # seconds
 arp_table = {}
+
 
 class ARPDetectorApp(QWidget):
     def __init__(self):
@@ -22,6 +27,7 @@ class ARPDetectorApp(QWidget):
         self.timer.timeout.connect(self.detect_arp_spoofing)
         self.setup_autostart()
         self.start_monitoring()  # start automatically
+        self.initTray()
 
     def initUI(self):
         self.setWindowTitle("ARP Spoofing Detector")
@@ -49,6 +55,37 @@ class ARPDetectorApp(QWidget):
         layout.addWidget(self.arp_table_btn)
 
         self.setLayout(layout)
+
+    def initTray(self):
+        self.tray_icon = QSystemTrayIcon(self)
+        self.tray_icon.setIcon(QIcon("icon.png"))  # <-- Укажи путь к иконке здесь
+        self.tray_icon.setToolTip("ARP Spoofing Detector")
+
+        tray_menu = QMenu()
+        restore_action = QAction("Show")
+        restore_action.triggered.connect(self.show)
+        tray_menu.addAction(restore_action)
+
+        exit_action = QAction("Exit")
+        exit_action.triggered.connect(self.exit_app)
+        tray_menu.addAction(exit_action)
+
+        self.tray_icon.setContextMenu(tray_menu)
+        self.tray_icon.show()
+
+    def closeEvent(self, event):
+        event.ignore()
+        self.hide()
+        self.tray_icon.showMessage(
+            "ARP Detector",
+            "App is running in the background.",
+            QSystemTrayIcon.Information,
+            3000
+        )
+
+    def exit_app(self):
+        self.tray_icon.hide()
+        QApplication.quit()
 
     def log(self, message):
         timestamp = time.strftime("[%H:%M:%S] ")
@@ -172,6 +209,7 @@ class ARPDetectorApp(QWidget):
             self.log("[✔] Auto-start enabled (Linux)")
         except Exception as e:
             self.log(f"[❌] Failed to enable auto-start: {e}")
+
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
