@@ -8,7 +8,7 @@
 
 1. Убедитесь, что у вас установлен **Python** и необходимые библиотеки:
    ```bash
-   pip install PyQt5 plyer
+   pip install PyQt5 win10toast
    ```
 
 2. Установите **PyInstaller** для создания исполняемого файла:
