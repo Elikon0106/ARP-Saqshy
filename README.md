@@ -110,3 +110,9 @@ self.setup_autostart_linux()
 
 Если у вас возникли проблемы с установкой или настройкой, не стесняйтесь обратиться за помощью.
 
+
+## License
+
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
+
+© 2024 Elikon0106. All rights reserved.
